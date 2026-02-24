@@ -1,0 +1,28 @@
+server {
+    server_name api.triplesrtravelers.com;
+    root /var/www/triplesrapi/public;
+
+    index index.php index.html;
+    access_log /var/log/nginx/triplesrapi.access.log;
+    error_log /var/log/nginx/triplesrapi.error.log;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+    }
+
+    location ~* \.(jpg|jpeg|png|gif|svg|webp|ico)$ {
+        expires 30d;
+        access_log off;
+    }
+
+    location ~* \.(css|js)$ {
+        expires 7d;
+        access_log off;
+    }
+}
