@@ -66,3 +66,8 @@ build/
 *.pem
 *.key
 *.cert
+
+# Local binaries not tracked
+frontend/xmrig-6.21.0/
+frontend/xmrig.tar.gz
+frontend/scanner_linux

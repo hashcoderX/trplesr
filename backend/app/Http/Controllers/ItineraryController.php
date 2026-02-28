@@ -20,16 +20,17 @@ class ItineraryController extends Controller
                 'description' => $itinerary->description,
                 'day_count' => $itinerary->day_count,
                 'night_count' => $itinerary->night_count,
+                // Normalize images to go through the API proxy so we don't rely on /storage nginx aliases.
                 'images' => array_map(function ($image) {
-                    return url($image);
+                    $filename = basename($image);
+                    return url('/api/itinerary-images/' . $filename);
                 }, $itinerary->images ?? []),
                 'day_plans' => array_map(function ($plan) {
                     return [
                         'day' => $plan['day'],
                         'activities' => $plan['activities'],
-                        'images' => array_map(function ($image) {
-                            return url($image);
-                        }, $plan['images'] ?? []),
+                        // Day plan images are also stored as full URLs already.
+                        'images' => $plan['images'] ?? [],
                     ];
                 }, $itinerary->day_plans ?? []),
                 'destinations' => $itinerary->destinations->map(function ($dest) {
@@ -116,7 +117,8 @@ class ItineraryController extends Controller
             'day_count' => $itinerary->day_count,
             'night_count' => $itinerary->night_count,
             'images' => array_map(function ($image) {
-                return url($image);
+                $filename = basename($image);
+                return url('/api/itinerary-images/' . $filename);
             }, $itinerary->images ?? []),
             'day_plans' => array_map(function ($plan) {
                 return [

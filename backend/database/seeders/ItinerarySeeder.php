@@ -47,7 +47,7 @@ class ItinerarySeeder extends Seeder
             'description' => 'Explore the ancient cities of Sri Lanka including Anuradhapura, Polonnaruwa, and Sigiriya.',
             'day_count' => 7,
             'night_count' => 6,
-            'images' => ['/images/itinerary1.jpg'],
+            'images' => ['itineraries/itinerary1.jpg'],
             'day_plans' => [
                 [
                     'day' => 1,
@@ -95,7 +95,7 @@ class ItinerarySeeder extends Seeder
             'description' => 'Relax on the beautiful beaches of southern Sri Lanka.',
             'day_count' => 5,
             'night_count' => 4,
-            'images' => ['/images/itinerary2.jpg'],
+            'images' => ['itineraries/itinerary2.jpg'],
             'day_plans' => [
                 [
                     'day' => 1,
@@ -133,7 +133,7 @@ class ItinerarySeeder extends Seeder
             'description' => 'Experience the misty hills and tea plantations of Sri Lanka.',
             'day_count' => 4,
             'night_count' => 3,
-            'images' => ['/images/itinerary3.jpg'],
+            'images' => ['itineraries/itinerary3.jpg'],
             'day_plans' => [
                 [
                     'day' => 1,

@@ -10,6 +10,7 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ItineraryController;
 use App\Http\Controllers\CustomQuoteController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,20 @@ Route::prefix('services')->group(function () {
 // Public itineraries
 Route::get('/itineraries', [ItineraryController::class, 'index']);
 Route::get('/itineraries/{itinerary}', [ItineraryController::class, 'show']);
+
+// Public image proxy for itineraries
+Route::get('/itinerary-images/{filename}', [ImageController::class, 'itinerary'])
+    ->where('filename', '[A-Za-z0-9._-]+');
+
+// Public image proxies for hotels, activities, and restaurants
+Route::get('/hotel-images/{filename}', [ImageController::class, 'hotel'])
+    ->where('filename', '[A-Za-z0-9._-]+');
+
+Route::get('/activity-images/{filename}', [ImageController::class, 'activity'])
+    ->where('filename', '[A-Za-z0-9._-]+');
+
+Route::get('/restaurant-images/{filename}', [ImageController::class, 'restaurant'])
+    ->where('filename', '[A-Za-z0-9._-]+');
 
 // Custom quotes
 Route::post('/custom-quotes', [CustomQuoteController::class, 'store']);

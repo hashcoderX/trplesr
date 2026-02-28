@@ -17,14 +17,13 @@ class ServicesController extends Controller
         $hotels = Hotel::paginate($perPage);
 
         $data = $hotels->map(function ($hotel) {
-            // Resolve first image and ensure absolute URL using asset() if relative
+            // Resolve first image and serve via API proxy to avoid nginx /storage issues
             $imagePath = (is_array($hotel->images) && count($hotel->images) > 0) ? $hotel->images[0] : null;
+            $imageUrl = '';
+
             if ($imagePath) {
-                $imageUrl = str_starts_with($imagePath, 'http')
-                    ? $imagePath
-                    : asset(ltrim($imagePath, '/'));
-            } else {
-                $imageUrl = '';
+                $filename = basename($imagePath);
+                $imageUrl = url('/api/hotel-images/' . $filename);
             }
 
             return [
@@ -69,7 +68,7 @@ class ServicesController extends Controller
                 'rating' => 4.8,
                 'duration_hours' => 8,
                 'price' => 45,
-                'image_url' => asset('storage/thinkstodo/kandy.png')
+                'image_url' => url('/api/activity-images/kandy.png')
             ],
             [
                 'id' => 2,
@@ -79,7 +78,7 @@ class ServicesController extends Controller
                 'rating' => 4.9,
                 'duration_hours' => 5,
                 'price' => 55,
-                'image_url' => asset('storage/thinkstodo/sigiriya_rock.png')
+                'image_url' => url('/api/activity-images/sigiriya_rock.png')
             ],
             [
                 'id' => 3,
@@ -89,7 +88,7 @@ class ServicesController extends Controller
                 'rating' => 4.7,
                 'duration_hours' => 3,
                 'price' => 25,
-                'image_url' => asset('storage/thinkstodo/nine_arch.png')
+                'image_url' => url('/api/activity-images/nine_arch.png')
             ],
             [
                 'id' => 4,
@@ -99,7 +98,7 @@ class ServicesController extends Controller
                 'rating' => 4.8,
                 'duration_hours' => 2,
                 'price' => 20,
-                'image_url' => asset('storage/thinkstodo/gall-dutch-fort.png')
+                'image_url' => url('/api/activity-images/gall-dutch-fort.png')
             ],
             [
                 'id' => 5,
@@ -109,7 +108,7 @@ class ServicesController extends Controller
                 'rating' => 4.6,
                 'duration_hours' => 4,
                 'price' => 60,
-                'image_url' => asset('storage/thinkstodo/wals_wachching.png')
+                'image_url' => url('/api/activity-images/wals_wachching.png')
             ],
             [
                 'id' => 6,
@@ -119,7 +118,7 @@ class ServicesController extends Controller
                 'rating' => 4.9,
                 'duration_hours' => 4,
                 'price' => 80,
-                'image_url' => asset('storage/thinkstodo/yala-safari.png')
+                'image_url' => url('/api/activity-images/yala-safari.png')
             ],
             [
                 'id' => 7,
@@ -129,7 +128,7 @@ class ServicesController extends Controller
                 'rating' => 4.5,
                 'duration_hours' => 4,
                 'price' => 30,
-                'image_url' => asset('storage/thinkstodo/colombo_city_tour.png')
+                'image_url' => url('/api/activity-images/colombo_city_tour.png')
             ],
             [
                 'id' => 8,
@@ -139,7 +138,7 @@ class ServicesController extends Controller
                 'rating' => 4.8,
                 'duration_hours' => 6,
                 'price' => 50,
-                'image_url' => asset('storage/thinkstodo/nuwara-eliya-tea-plantation-tour.png')
+                'image_url' => url('/api/activity-images/nuwara-eliya-tea-plantation-tour.png')
             ],
             [
                 'id' => 9,
@@ -149,7 +148,7 @@ class ServicesController extends Controller
                 'rating' => 4.7,
                 'duration_hours' => 3,
                 'price' => 40,
-                'image_url' => asset('storage/thinkstodo/betota-jetsky.png')
+                'image_url' => url('/api/activity-images/betota-jetsky.png')
             ],
             [
                 'id' => 10,
@@ -197,7 +196,7 @@ class ServicesController extends Controller
                 'rating' => 4.7,
                 'cuisine' => 'Sri Lankan',
                 'price_level' => '$$',
-                'image_url' => asset('storage/restaurants/Spice-Garden.png')
+                'image_url' => url('/api/restaurant-images/Spice-Garden.png')
             ],
             [
                 'id' => 2,
@@ -206,7 +205,7 @@ class ServicesController extends Controller
                 'rating' => 4.4,
                 'cuisine' => 'Seafood',
                 'price_level' => '$$',
-                'image_url' => asset('storage/restaurants/Ocean-Breeze-Cafe.png')
+                'image_url' => url('/api/restaurant-images/Ocean-Breeze-Cafe.png')
             ],
             [
                 'id' => 3,
@@ -215,7 +214,7 @@ class ServicesController extends Controller
                 'rating' => 4.1,
                 'cuisine' => 'Cafe',
                 'price_level' => '$',
-                'image_url' => asset('storage/restaurants/Ceylon-Coffee-House.png')
+                'image_url' => url('/api/restaurant-images/Ceylon-Coffee-House.png')
             ],
             [
                 'id' => 4,
@@ -224,7 +223,7 @@ class ServicesController extends Controller
                 'rating' => 4.8,
                 'cuisine' => 'Seafood',
                 'price_level' => '$$$',
-                'image_url' => asset('storage/restaurants/Ministry-of-Crab.png')
+                'image_url' => url('/api/restaurant-images/Ministry-of-Crab.png')
             ],
             [
                 'id' => 5,
@@ -233,7 +232,7 @@ class ServicesController extends Controller
                 'rating' => 4.6,
                 'cuisine' => 'Sri Lankan Fusion',
                 'price_level' => '$$$',
-                'image_url' => asset('storage/restaurants/The-Fortress.png')
+                'image_url' => url('/api/restaurant-images/The-Fortress.png')
             ],
             [
                 'id' => 6,
@@ -242,7 +241,7 @@ class ServicesController extends Controller
                 'rating' => 4.5,
                 'cuisine' => 'Contemporary Sri Lankan',
                 'price_level' => '$$$',
-                'image_url' => asset('storage/restaurants/Paradise-Road.png')
+                'image_url' => url('/api/restaurant-images/Paradise-Road.png')
             ],
             [
                 'id' => 7,
@@ -251,7 +250,7 @@ class ServicesController extends Controller
                 'rating' => 4.3,
                 'cuisine' => 'International',
                 'price_level' => '$$',
-                'image_url' => asset('storage/restaurants/Dutch-Hospital.png')
+                'image_url' => url('/api/restaurant-images/Dutch-Hospital.png')
             ],
             [
                 'id' => 8,
@@ -260,7 +259,7 @@ class ServicesController extends Controller
                 'rating' => 4.4,
                 'cuisine' => 'Healthy & Organic',
                 'price_level' => '$$',
-                'image_url' => asset('storage/restaurants/Gallery-Cafe.png')
+                'image_url' => url('/api/restaurant-images/Gallery-Cafe.png')
             ],
             [
                 'id' => 9,

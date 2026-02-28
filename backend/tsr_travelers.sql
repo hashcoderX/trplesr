@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2025 at 03:26 PM
+-- Generation Time: Feb 25, 2026 at 05:06 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -66,7 +66,8 @@ CREATE TABLE `conversations` (
 
 INSERT INTO `conversations` (`id`, `visitor_token`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
 (1, '393c7eca-de5c-45b3-a7a1-b580fd85f4eb', NULL, 'open', '2025-12-26 02:55:40', '2025-12-26 02:55:40'),
-(2, '061a07d7-8087-42aa-8f00-d30ef074d8e2', NULL, 'open', '2025-12-26 03:09:42', '2025-12-26 03:09:42');
+(2, '061a07d7-8087-42aa-8f00-d30ef074d8e2', NULL, 'open', '2025-12-26 03:09:42', '2025-12-26 03:09:42'),
+(3, 'f137cf17-f8af-484f-96f2-290825ba11ec', NULL, 'open', '2025-12-28 10:11:02', '2025-12-28 10:11:02');
 
 -- --------------------------------------------------------
 
@@ -250,8 +251,7 @@ CREATE TABLE `hotels` (
 --
 
 INSERT INTO `hotels` (`id`, `name`, `location`, `rating`, `description`, `images`, `created_at`, `updated_at`) VALUES
-(2, 'Shangri-La Colombo', 'Colombo', NULL, NULL, NULL, '2025-12-18 11:40:27', '2025-12-18 11:40:27'),
-(3, 'Cinnamon Citadel Kandy', 'Kandy', NULL, NULL, NULL, '2025-12-18 11:40:27', '2025-12-18 11:40:27');
+(4, 'Amba Yaalu', 'Kandalama', '5.0', NULL, '[\"\\/storage\\/hotels\\/DpfcR6masOdAYFPCeocE1B83BItznJmgYuYLuz2f.jpg\"]', '2026-01-06 22:57:03', '2026-01-06 22:57:03');
 
 -- --------------------------------------------------------
 
@@ -266,14 +266,6 @@ CREATE TABLE `hotel_itinerary` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `hotel_itinerary`
---
-
-INSERT INTO `hotel_itinerary` (`id`, `hotel_id`, `itinerary_id`, `created_at`, `updated_at`) VALUES
-(5, 2, 9, NULL, NULL),
-(6, 3, 9, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -507,8 +499,10 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (37, 'App\\Models\\User', 6, 'api', 'c028842290ff36fbdfbd6e19594300bc25120c04e29210eaeccc98e453948be5', '[\"*\"]', '2025-12-15 10:42:05', NULL, '2025-12-15 10:37:37', '2025-12-15 10:42:05'),
 (39, 'App\\Models\\User', 6, 'api', '1b1bf6821a701b06698d95548aa4c55ad9344396cc820d2a0c776aa66010616c', '[\"*\"]', '2025-12-18 12:41:43', NULL, '2025-12-18 11:44:28', '2025-12-18 12:41:43'),
 (40, 'App\\Models\\User', 6, 'api', 'e290dabf935738c5828ecb4c88bb7a19ac74dae2b1738d371ecc3c294fc609f1', '[\"*\"]', '2025-12-25 23:08:21', NULL, '2025-12-25 23:00:46', '2025-12-25 23:08:21'),
-(41, 'App\\Models\\User', 6, 'api', '64a65a644907b3f2745e5e8fe0e1256b1325c022e882ec6ce26360a5594a8999', '[\"*\"]', '2025-12-26 13:05:22', NULL, '2025-12-25 23:08:35', '2025-12-26 13:05:22'),
-(43, 'App\\Models\\User', 6, 'api', 'c7900dd56204bdb53d62eefc170fb0757e145e2ac231a285affb759d40012c88', '[\"*\"]', '2025-12-26 01:23:13', NULL, '2025-12-26 01:18:22', '2025-12-26 01:23:13');
+(41, 'App\\Models\\User', 6, 'api', '64a65a644907b3f2745e5e8fe0e1256b1325c022e882ec6ce26360a5594a8999', '[\"*\"]', '2026-02-24 01:40:39', NULL, '2025-12-25 23:08:35', '2026-02-24 01:40:39'),
+(43, 'App\\Models\\User', 6, 'api', 'c7900dd56204bdb53d62eefc170fb0757e145e2ac231a285affb759d40012c88', '[\"*\"]', '2025-12-26 01:23:13', NULL, '2025-12-26 01:18:22', '2025-12-26 01:23:13'),
+(45, 'App\\Models\\User', 6, 'api', 'dfc742b8583ea38b4c2c0ba965145654776f0a9ae9381e1fda84a504de80d5d9', '[\"*\"]', '2025-12-29 01:02:05', NULL, '2025-12-28 21:40:10', '2025-12-29 01:02:05'),
+(46, 'App\\Models\\User', 6, 'api', '48aa6d002e8aa0cc6d947e4af8a7435d44683ec7c1d9610dcb4557f36015c214', '[\"*\"]', '2026-01-06 23:31:30', NULL, '2026-01-06 22:50:40', '2026-01-06 23:31:30');
 
 -- --------------------------------------------------------
 
@@ -781,7 +775,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `conversations`
 --
 ALTER TABLE `conversations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `custom_quotes`
@@ -811,7 +805,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `hotels`
 --
 ALTER TABLE `hotels`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `hotel_itinerary`
@@ -853,7 +847,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `roles`
