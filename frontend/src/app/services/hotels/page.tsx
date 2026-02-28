@@ -77,10 +77,12 @@ export default function HotelsPage() {
                 <div className="aspect-[16/10] bg-gray-100">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   {h.image_url ? (
-                    <img 
-                      src={h.image_url.startsWith('http') ? h.image_url : `https://backend.triplesrtravelers.com${h.image_url}`} 
-                      alt={h.name} 
-                      className="w-full h-full object-cover" 
+                    <img
+                      src={h.image_url.startsWith('http')
+                        ? h.image_url
+                        : `${process.env.NEXT_PUBLIC_SITE_URL || 'https://triplesrtravelers.com'}${h.image_url}`}
+                      alt={h.name}
+                      className="w-full h-full object-cover"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-gray-500">No image</div>
